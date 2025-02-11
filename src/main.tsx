@@ -10,7 +10,7 @@ const root: Root = createRoot(rootElement);
 
 root.render(
     <StrictMode>
-        <BrowserRouter basename={"Personal-website"}>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
             <App />
         </BrowserRouter>
     </StrictMode>
