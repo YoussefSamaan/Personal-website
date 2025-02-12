@@ -21,13 +21,19 @@ export const ResumeList = () => {
                                 </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <button
-                                    className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
-                                    onClick={() => window.open(resume.link, '_blank')}
-                                >
-                                    <FileText className="w-4 h-4 mr-2" />
-                                    View
-                                </button>
+                                <a href={resume.link} target="_blank" rel="noopener noreferrer">
+                                    <button className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                                        <FileText className="w-4 h-4 mr-2" />
+                                        View
+                                    </button>
+                                </a>
+                                {/*<button*/}
+                                {/*    className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"*/}
+                                {/*    onClick={() => window.open(resume.link, '_blank')}*/}
+                                {/*>*/}
+                                {/*    <FileText className="w-4 h-4 mr-2" />*/}
+                                {/*    View*/}
+                                {/*</button>*/}
                                 {/*<button*/}
                                 {/*    className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"*/}
                                 {/*    onClick={() => window.open(resume.link, '_blank') }// download the resume*/}
@@ -36,9 +42,15 @@ export const ResumeList = () => {
                                 {/*    Download*/}
                                 {/*</button>*/}
 
-                                <a href={resume.link} download={resume.name}>
-                                    <button
-                                        className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                                {/*<a href={resume.link} download={resume.name}>*/}
+                                {/*    <button*/}
+                                {/*        className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">*/}
+                                {/*        <Download className="w-4 h-4 mr-2" />*/}
+                                {/*        Download*/}
+                                {/*    </button>*/}
+                                {/*</a>*/}
+                                <a href={resume.link} download>
+                                    <button className="inline-flex items-center px-3 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
                                         <Download className="w-4 h-4 mr-2" />
                                         Download
                                     </button>
