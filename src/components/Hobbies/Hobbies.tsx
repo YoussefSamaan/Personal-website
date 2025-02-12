@@ -1,23 +1,23 @@
 import {useEffect, useState} from 'react';
-import { HobbyItem } from '../../types.ts';
+import {HobbyListItem} from '../../types.ts';
 import {useNavigate, useParams} from "react-router-dom";
 import {hobbies} from "../../data/hobbiesData.ts";
 
 export function Hobbies() {
-    const [selectedHobby, setSelectedHobby] = useState<HobbyItem | null>(null);
+    const [selectedHobby, setSelectedHobby] = useState<HobbyListItem | null>(null);
     const { hobby } = useParams<'hobby'>();
     const navigate = useNavigate();
 
     // If a hobby is selected, update the URL and render the hobby details
-    const handleHobbyClick = (hobby: HobbyItem) => {
-        navigate(`/hobbies/${hobby.id}`);
+    const handleHobbyClick = (hobby: HobbyListItem) => {
+        navigate(`/hobbies/${hobby.title}`);
         setSelectedHobby(hobby);
     };
 
     // If the URL has a hobby ID, render the hobby details
     useEffect(() => {
         if (hobby) {
-            const selectedHobby = hobbies.find((h) => h.id === hobby);
+            const selectedHobby = hobbies.find((h) => h.title === hobby);
             if (selectedHobby) {
                 setSelectedHobby(selectedHobby);
             }
@@ -32,9 +32,9 @@ export function Hobbies() {
                 <div className="max-w-6xl mx-auto py-12 px-4">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8 text-center">Hobbies & Interests</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {hobbies.map((hobby) => (
+                    {hobbies.map((hobby, index) => (
                         <div
-                            key={hobby.id}
+                            key={index}
                             onClick={() => handleHobbyClick(hobby)}
                             className="bg-white rounded-lg shadow-md p-6 cursor-pointer hover:shadow-lg transition-shadow"
                         >
@@ -49,27 +49,7 @@ export function Hobbies() {
                 </div>
             ) : (
                 <div>
-                {selectedHobby.details ? (
-                    <div className="max-w-6xl mx-auto py-12 px-4">
-                        <h2 className="text-3xl font-bold text-slate-800 mb-8 text-center">Hobbies & Interests</h2>
-                <div className="bg-white rounded-lg shadow-md p-6">
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center">
-                            <selectedHobby.icon className="w-8 h-8 text-slate-600 mr-3" />
-                            <h3 className="text-2xl font-semibold text-slate-800">{selectedHobby.title}</h3>
-                        </div>
-                    </div>
-                        <div>
-                            <h4 className="text-xl font-semibold text-slate-800 mb-4">Details</h4>
-                            {selectedHobby.details}
-                        </div>
-                    <selectedHobby.component />
-                </div>
-                    </div>
-
-                    ) : (
-                        <selectedHobby.component />
-                    )}
+                     <selectedHobby.component />
                 </div>
             )}
         </div>

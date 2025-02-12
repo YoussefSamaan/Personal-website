@@ -6,13 +6,13 @@ export const ResumeList = () => {
         <div className="space-y-6">
             <h2 className="text-2xl font-bold text-slate-800">Saved Resumes</h2>
             <div className="grid gap-4">
-                {resumes.map((resume) => (
+                {resumes.map((resume, index) => (
                     <div
-                        key={resume.id}
+                        key={index}
                         className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
                     >
                         <div className="flex items-start justify-between">
-                            <div className="flex items-center">
+                            <div className="flex items-center pl-1">
                                 <FileText className="w-8 h-8 text-slate-600 mr-4" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-slate-800">{resume.name}</h3>

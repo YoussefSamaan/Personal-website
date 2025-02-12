@@ -37,9 +37,9 @@ export function Navigation({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex md:items-center md:space-x-4">
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                   <NavLink
-                      key={item.id}
+                      key={index}
                       to={item.path}
                       className={({ isActive }) =>
                           `flex items-center px-3 py-2 text-sm font-medium rounded-md ${
@@ -71,9 +71,9 @@ export function Navigation({
         {isMenuOpen && (
             <div className="md:hidden bg-slate-50 border-b border-slate-200">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                     <NavLink
-                        key={item.id}
+                        key={index}
                         to={item.path}
                         onClick={() => setIsMenuOpen(false)}
                         className={({ isActive }) =>

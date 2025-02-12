@@ -25,7 +25,7 @@ export interface TechCategory {
   items: string[];
 }
 
-export interface HobbyItem {
+export interface HobbyListItem {
   title: string;
   icon: LucideIcon;
   description: string;
@@ -56,4 +56,13 @@ export interface ResumeItem {
   description: string;
   lastModified: string;
   link: string;
+}
+
+export interface HobbyItem {
+  title: string;
+  image: string;
+  year?: string;
+  rating?: number;
+  description?: string;
+  items?: string[];
 }

@@ -26,8 +26,8 @@ export function ResumeBuilder( { timelineItems }: { timelineItems: TimelineItem[
 
     const toggleItem = (item: TimelineItem) => {
         setSelectedItems(prev =>
-            prev.find(i => i.id === item.id)
-                ? prev.filter(i => i.id !== item.id)
+            prev.find(i => i.title === item.title)
+                ? prev.filter(i => i.title !== item.title)
                 : [...prev, item]
         );
     };
@@ -52,11 +52,11 @@ export function ResumeBuilder( { timelineItems }: { timelineItems: TimelineItem[
                         )}
                     </div>
                     <div className="space-y-4">
-                        {groupedItems[type].map((item) => (
+                        {groupedItems[type].map((item, index) => (
                             <div
-                                key={item.id}
+                                key={index}
                                 className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
-                                    selectedItems.find(i => i.id === item.id)
+                                    selectedItems.find(i => i.title === item.title)
                                         ? 'border-slate-700 bg-slate-50'
                                         : 'border-slate-200 hover:border-slate-400'
                                 }`}

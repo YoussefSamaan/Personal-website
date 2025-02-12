@@ -1,4 +1,4 @@
-import {MovieInfo} from "../types.ts";
+import {MovieInfo} from "../../types.ts";
 
 export const movies: MovieInfo[] = [
   {

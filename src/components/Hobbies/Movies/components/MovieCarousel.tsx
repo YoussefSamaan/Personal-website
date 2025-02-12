@@ -1,5 +1,5 @@
 import Ticker from './Ticker.tsx'
-import { movies } from "../../../../data/movieInfo.ts";
+import { movies } from "../../../../data/Hobbies/movieInfo.ts";
 import { MovieInfo } from "../../../../types.ts";
 
 

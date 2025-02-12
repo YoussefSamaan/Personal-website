@@ -39,7 +39,7 @@ export function TimelineSection({
 
                     return (
                         <div
-                            key={item.id}
+                            key={index}
                             className={`relative flex items-center ${layoutClass}`}
                         >
                             {/* Icon */}

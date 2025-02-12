@@ -18,7 +18,7 @@ export function Timeline({ items = timelineItems }: TimelineProps) {
                 {/* Timeline cards */}
                 <div className="space-y-12">
                     {items.map((item, index) => (
-                        <TimelineCard key={item.id} item={item} index={index} />
+                        <TimelineCard key={index} item={item} index={index} />
                     ))}
                 </div>
             </div>

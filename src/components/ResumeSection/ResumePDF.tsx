@@ -77,8 +77,8 @@ export function ResumePDF({ selectedItems }: ResumePDFProps) {
           {Object.keys(groupedItems).map((type) => (
               <View key={type} style={styles.section}>
                 <Text style={styles.heading}>{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
-                {groupedItems[type].map((item) => (
-                    <View key={item.id} style={styles.item}>
+                {groupedItems[type].map((item, index) => (
+                    <View key={index} style={styles.item}>
                       <Text style={styles.itemTitle}>{item.title}</Text>
                       <Text style={styles.itemOrg}>{item.organization}</Text>
                       <Text style={styles.itemDate}>{item.date}</Text>

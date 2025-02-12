@@ -16,9 +16,9 @@ export function Home() {
 
 
         <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
-          {socialsItems.map((item) => (
+          {socialsItems.map((item, index) => (
             <a
-              key={item.id}
+              key={index}
               href={item.action}
               target="_blank"
               className="flex items-center justify-center px-5 py-3 text-lg font-medium rounded-lg bg-slate-100 text-slate-900 hover:bg-slate-200 transition w-48"

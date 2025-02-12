@@ -1,18 +1,24 @@
-import { Film, Music, Book, Gamepad, Camera } from 'lucide-react';
+import { Film, Music, Medal, Book, Gamepad, Camera } from 'lucide-react';
 import { Movies as MoviesComponent } from '../components/Hobbies/Movies';
 import { Music as MusicComponent } from '../components/Hobbies/Music';
 import { Reading as ReadingComponent } from '../components/Hobbies/Reading';
 import { Gaming as GamingComponent } from '../components/Hobbies/Gaming';
 import { Photography as PhotographyComponent } from '../components/Hobbies/Photography';
-import { HobbyItem } from '../types';
+import { HobbyListItem } from '../types';
+import {Sports as SportsComponent} from "../components/Hobbies/Sports.tsx";
 
-export const hobbies: HobbyItem[] = [
+export const hobbies: HobbyListItem[] = [
     {
-        id: 'movies',
         title: 'Movies',
         icon: Film,
         description: 'Passionate about cinema, from classic films to modern blockbusters.',
         component: MoviesComponent,
+    },
+    {
+        title: 'Sports',
+        icon: Medal,
+        description: 'Sports I enjoy playing',
+        component: SportsComponent,
     },
     // {
     //     id: 'music',
