@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot, Root } from 'react-dom/client'
-import {BrowserRouter, HashRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx'
 import './index.css'
 
@@ -10,10 +10,8 @@ const root: Root = createRoot(rootElement);
 
 root.render(
     <StrictMode>
-        {/*<BrowserRouter basename={import.meta.env.BASE_URL}>*/}
-        <HashRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
             <App />
-        </HashRouter>
-        {/*</BrowserRouter>*/}
+        </BrowserRouter>
     </StrictMode>
 );
