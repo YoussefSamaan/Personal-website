@@ -11,6 +11,6 @@ export const resumes: ResumeItem[] = [
         name: "Software Engineering Resume",
         description: "This resume does not have a research section. it applies to also Data engineering and data science",
         lastModified: "2024-03-10",
-        link: `${import.meta.env.BASE_URL}/Resumes/Youssef_Samaan_Resume.pdf`,
+        link: `${import.meta.env.BASE_URL}Resumes/Youssef_Samaan_Resume.pdf`,
     },
 ];
