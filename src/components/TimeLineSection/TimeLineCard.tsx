@@ -1,11 +1,11 @@
-import { TimelineItem } from '../../types';
+import {TimelineItem} from '../../types';
 
 interface TimelineCardProps {
     item: TimelineItem;
     index: number;
 }
 
-export function TimelineCard({ item, index }: TimelineCardProps) {
+export function TimelineCard({item, index}: TimelineCardProps) {
     return (
         <div
             className={`relative flex items-center ${
@@ -14,8 +14,9 @@ export function TimelineCard({ item, index }: TimelineCardProps) {
         >
             {/* Line and Icon */}
             <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                <div className="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center">
-                    <item.icon className="w-4 h-4 text-slate-600" />
+                <div
+                    className="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center">
+                    <item.icon className="w-4 h-4 text-slate-600"/>
                 </div>
             </div>
 
@@ -39,16 +40,13 @@ export function TimelineCard({ item, index }: TimelineCardProps) {
                             {item.organization}
                         </p>
                     )}
-                    {item.description &&
-                        (Array.isArray(item.description) ? (
-                            item.description.map((desc, i) => (
-                                <p key={i} className="mt-2 text-slate-500">
-                                    {desc}
-                                </p>
-                            ))
-                        ) : (
-                            <p className="mt-2 text-slate-500">{item.description}</p>
-                        ))}
+                    {item.description && Array.isArray(item.description) && (
+                        item.description.map((desc, i) => (
+                            <li key={i} className="mt-2 text-slate-500">
+                                {desc}
+                            </li>
+                        ))
+                    )}
                 </div>
             </div>
         </div>

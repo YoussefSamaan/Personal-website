@@ -64,7 +64,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({
     };
 
     return (
-        <div className="max-w-4xl mx-auto py-12">
+        <div className="max-w-7xl mx-auto py-12">
             <TabSwitcher activeTab={activeTab} onTabChange={handleTabChange} />
             {renderTimeline()}
         </div>

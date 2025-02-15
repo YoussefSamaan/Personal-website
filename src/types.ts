@@ -11,6 +11,7 @@ export interface TimelineItem {
   location?: string;
   date?: string;
   description?: string[];
+  resumeItem?: string[];
   image?: string;
   technologies?: string[];
   links?: Array<{
