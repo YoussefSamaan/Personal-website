@@ -1,79 +1,209 @@
-import {PDFDownloadLink} from "@react-pdf/renderer";
-import {ResumePDF} from "./ResumePDF.tsx";
-import {Download} from "lucide-react";
-import {TimelineItem} from "../../types.ts";
+import {Plus, Minus} from "lucide-react";
 import {useState} from "react";
+import {TimelineItem, TechSkillItem, HobbyListItem, ResumeJson} from "../../types";
+import {technicalSkills} from "../../data/techSkillsInfo.ts";
+import {hobbies} from "../../data/hobbiesData";
+
+// Fixed order for resume sections.
+const sectionOrder = ["education", "work", "research", "project", "technologies", "award", "hobby"];
 
 
-function groupTimelineItemsByType(items: TimelineItem[]): { [type: string]: TimelineItem[] } {
-    const groupedItems: { [type: string]: TimelineItem[] } = {};
-
-    items.forEach((item) => {
-        const type = item.type;
-        if (!groupedItems[type]) {
-            groupedItems[type] = [];
+function createResumeJson(timelineItems: TimelineItem[], techCategories: TechSkillItem[], hobbyItems: HobbyListItem[]): ResumeJson {
+    const grouped: ResumeJson = {};
+    sectionOrder.forEach((key) => {
+        if (key === "technologies") {
+            for (const tech of techCategories) {
+                grouped[tech.techSkill] = tech.items;
+            }
+        } else if (key === "hobby") {
+            grouped[key] = hobbyItems.map((i) => i.title);
+        } else if (key === "award") {
+            const filteredItems = timelineItems.filter((item) => item.type.toLowerCase() === key);
+            grouped[key] = filteredItems.map((i) => i.resumeItem ? i.resumeItem[0] : i.title);
+        } else {
+            const filteredItems = timelineItems.filter((item) => item.type.toLowerCase() === key);
+            if (filteredItems.length > 0) {
+                grouped[key] = filteredItems;
+            }
         }
-        groupedItems[type].push(item);
     });
-
-    return groupedItems;
+    return grouped;
 }
 
+interface ResumeBuilderProps {
+    timelineItems: TimelineItem[];
+    selectedResumeItems: ResumeJson;
+    onSelectionChange: (newSelection: ResumeJson) => void;
+}
+
+export function ResumeBuilder({timelineItems, selectedResumeItems, onSelectionChange}: ResumeBuilderProps) {
+
+    const fullResumeJson = createResumeJson(timelineItems, technicalSkills, hobbies);
+
+    const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>(() => {
+        const initial: { [key: string]: boolean } = {};
+        sectionOrder.forEach((key) => {
+            initial[key] = true; // set to true to keep them open by default
+        });
+        return initial;
+    });
+
+    const toggleSection = (sectionKey: string) => {
+        setOpenSections((prev) => ({...prev, [sectionKey]: !prev[sectionKey]}));
+    };
+
+    const toggleResumeItem = (type: string, item: string | TimelineItem) => {
+        const updated = {...selectedResumeItems};
+        const current = updated[type] ?? [];
+        if (typeof item === "string") {
+            if ((current as string[]).includes(item)) {
+                updated[type] = (current as string[]).filter((i) => i !== item);
+            } else {
+                updated[type] = [...(current as string[]), item];
+            }
+        } else {
+            if ((current as TimelineItem[]).some((i) => i.title === item.title)) {
+                updated[type] = (current as TimelineItem[]).filter((i) => i.title !== item.title);
+            } else {
+                updated[type] = [...(current as TimelineItem[]), item];
+            }
+        }
+        onSelectionChange(updated);
+    };
+
+    const renderTimelineSection = (sectionKey: string, items: TimelineItem[] | string[]) => {
+        if (!items || items.length === 0) return null;
+        const header = sectionKey.charAt(0).toUpperCase() + (
+            sectionKey.slice(1) === "obby" ? "obbies" :
+                sectionKey.slice(1) === "ward" ? "wards" :
+                    sectionKey.slice(1)
+        );
+
+        return (
+            <div
+                key={sectionKey}
+                className={`mb-8 pt-4 pl-4 pr-4 cursor-pointer rounded-lg border-2 border-slate-200 hover:border-slate-400 ${
+                    openSections[sectionKey] ? "pb-4" : ""
+                }`}
+                onClick={() => toggleSection(sectionKey)}
+
+            >
+                <div className="flex justify-between items-center mb-4">
+                    <div className={"flex gap-2 items-center justify-center"}>
+                        {/*{openSections[sectionKey] ? (*/}
+                        {/*    <Minus*/}
+                        {/*        className="w-8 h-8"*/}
+                        {/*    />*/}
+                        {/*) : (*/}
+                        {/*    <Plus*/}
+                        {/*        className="w-8 h-8"*/}
+                        {/*    />*/}
+                        {/*)}*/}
+                        <h3 className="text-xl font-semibold text-slate-800">{header}</h3>
+                    </div>
 
 
-export function ResumeBuilder( { timelineItems }: { timelineItems: TimelineItem[] } ) {
-    const [selectedItems, setSelectedItems] = useState<TimelineItem[]>([]);
+                    <div className={"flex gap-2"}>
+                        {openSections[sectionKey] ? (
+                            <Minus
+                                className="w-8 h-8"
+                            />
+                        ) : (
+                            <Plus
+                                className="w-8 h-8"
+                            />
+                        )}
+                    </div>
 
-    const toggleItem = (item: TimelineItem) => {
-        setSelectedItems(prev =>
-            prev.find(i => i.title === item.title)
-                ? prev.filter(i => i.title !== item.title)
-                : [...prev, item]
+                </div>
+                {openSections[sectionKey] && (
+                    <div className="space-y-4">
+                        {items.map((item) => (
+                            Array.isArray(fullResumeJson[sectionKey]) ? (
+                                typeof item === "string" ? (
+                                    <div
+                                        key={item}
+                                        className={`p-4 rounded-lg border-2 transition-all cursor-pointer flex items-center ${
+                                            selectedResumeItems[sectionKey] &&
+                                            selectedResumeItems[sectionKey].find((i) => i === item)
+                                                ? "border-slate-700 bg-slate-50"
+                                                : "border-slate-200 hover:border-slate-400"
+                                        }`}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleResumeItem(sectionKey, item);
+                                        }}
+                                    >
+                                        {/*{item.icon && <item.icon className="w-5 h-5 text-slate-600 mr-3"/>}*/}
+                                        <div>
+                                            <h3 className="font-semibold text-slate-800">{item}</h3>
+                                            {/*<p className="text-sm text-slate-600">*/}
+                                            {/*    {item.organization} • {item.date}*/}
+                                            {/*</p>*/}
+                                            {/*{item.description && Array.isArray(item.description) && (*/}
+                                            {/*    <ul className="list-none pl-0 mt-2 space-y-2">*/}
+                                            {/*        {item.description.map((desc, i) => (*/}
+                                            {/*            <li key={i} className="text-slate-500">*/}
+                                            {/*                {desc}*/}
+                                            {/*            </li>*/}
+                                            {/*        ))}*/}
+                                            {/*    </ul>*/}
+                                            {/*)}*/}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div
+                                        key={item.title}
+                                        className={`p-4 rounded-lg border-2 transition-all cursor-pointer flex items-center ${
+                                            selectedResumeItems[sectionKey] &&
+                                            (selectedResumeItems[sectionKey] as TimelineItem[]).find((i) => i.title === item.title)
+                                                ? "border-slate-700 bg-slate-50"
+                                                : "border-slate-200 hover:border-slate-400"
+                                        }`}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleResumeItem(sectionKey, item);
+                                        }}
+                                    >
+                                        {item.icon && <item.icon className="w-5 h-5 text-slate-600 mr-3"/>}
+                                        <div>
+                                            <h3 className="font-semibold text-slate-800">{item.title}</h3>
+                                            <p className="text-sm text-slate-600">
+                                                {item.organization} • {item.date}
+                                            </p>
+                                            {/*{item.description && Array.isArray(item.description) && (*/}
+                                            {/*    <ul className="list-none pl-0 mt-2 space-y-2">*/}
+                                            {/*        {item.description.map((desc, i) => (*/}
+                                            {/*            <li key={i} className="text-slate-500">*/}
+                                            {/*                {desc}*/}
+                                            {/*            </li>*/}
+                                            {/*        ))}*/}
+                                            {/*    </ul>*/}
+                                            {/*)}*/}
+                                        </div>
+                                    </div>
+                                )
+                            ) : (
+                                <div key={typeof item === "string" ? item : item.title}></div>
+                            )
+                        ),)}
+                    </div>
+                )}
+            </div>
+
         );
     };
 
-    const groupedItems = groupTimelineItemsByType(timelineItems);
-
     return (
         <div className="space-y-8">
-            {Object.keys(groupedItems).map((type, index) => (
-                <div key={type}>
-                    <div className="flex justify-between pt-0 mb-4">
-                        <h3 className="text-xl font-semibold text-slate-800">{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                        {index === 0 && selectedItems.length > 0 && (
-                            <PDFDownloadLink
-                                document={<ResumePDF selectedItems={selectedItems} />}
-                                fileName="Youssef_Samaaen_Resume.pdf"
-                                className="inline-flex items-center px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-600 transition-colors"
-                            >
-                            <Download className="w-4 h-4 mr-2" />
-                            Export PDF
-                            </PDFDownloadLink>
-                        )}
-                    </div>
-                    <div className="space-y-4">
-                        {groupedItems[type].map((item, index) => (
-                            <div
-                                key={index}
-                                className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
-                                    selectedItems.find(i => i.title === item.title)
-                                        ? 'border-slate-700 bg-slate-50'
-                                        : 'border-slate-200 hover:border-slate-400'
-                                }`}
-                                onClick={() => toggleItem(item)}
-                            >
-                                <div className="flex items-center">
-                                    <item.icon className="w-5 h-5 text-slate-600 mr-3" />
-                                    <div>
-                                        <h3 className="font-semibold text-slate-800">{item.title}</h3>
-                                        <p className="text-sm text-slate-600">{item.organization} • {item.date}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ))}
+            {sectionOrder.map((sectionKey) => {
+                if (sectionKey === "technologies") {
+                    return technicalSkills.map((tech) => renderTimelineSection(tech.techSkill, fullResumeJson[tech.techSkill]));
+                } else {
+                    return renderTimelineSection(sectionKey, fullResumeJson[sectionKey]);
+                }
+            })}
         </div>
     );
+
 }

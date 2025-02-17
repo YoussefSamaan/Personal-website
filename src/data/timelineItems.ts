@@ -24,6 +24,7 @@ export const timelineItems: TimelineItem[] = [
         location: "McGill University",
         date: "Feb 9-10, 2025",
         description: ["Created multiple bots to win compete against other teams.", "First place 2x and Third place 2x.", "Won $46 😆."],
+        resumeItem: ["Poker bot Competition 2x 1st and 2x 3rd."],
         image: "",
         technologies: ['', ''],
         links: [
