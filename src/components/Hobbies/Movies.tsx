@@ -3,7 +3,7 @@ import Intro from "./Movies/components/Intro.tsx";
 
 export function Movies() {
     return (
-        <div className="flex front-page">
+        <div className="flex">
             <Intro/>
             <MovieCarousel/>
         </div>

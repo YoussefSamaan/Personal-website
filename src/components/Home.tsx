@@ -1,4 +1,4 @@
-import { socialsItems } from "../data/socialsItems"
+import { socialsItems } from "../data/SocialsItems.ts"
 
 export function Home() {
   return (

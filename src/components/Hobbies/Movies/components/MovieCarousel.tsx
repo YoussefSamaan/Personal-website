@@ -1,5 +1,5 @@
 import Ticker from './Ticker.tsx'
-import { movies } from "../../../../data/Hobbies/movieInfo.ts";
+import { movies } from "../../../../data/Hobbies/MovieInfo.ts";
 import { MovieInfo } from "../../../../types.ts";
 
 
@@ -37,7 +37,7 @@ function MovieCarousel() {
 
 
   return (
-    <div className="flex space-x-2">
+    <div className="flex flex-1 justify-center space-x-2">
       <Ticker
         movieList={movies1} 
         animationDirection="animate-scroll-down"

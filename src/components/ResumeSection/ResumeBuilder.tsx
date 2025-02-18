@@ -1,7 +1,7 @@
 import {Plus, Minus} from "lucide-react";
 import {useState} from "react";
 import {TimelineItem, TechSkillItem, HobbyListItem, ResumeJson} from "../../types";
-import {technicalSkills} from "../../data/techSkillsInfo.ts";
+import {technicalSkills} from "../../data/TechSkillsInfo.ts";
 import {hobbies} from "../../data/hobbiesData";
 
 // Fixed order for resume sections.

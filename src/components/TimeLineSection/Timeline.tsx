@@ -1,7 +1,7 @@
 // Timeline.tsx
 
 import { TimelineItem } from '../../types.ts';
-import { timelineItems } from '../../data/timelineItems.ts';
+import { timelineItems } from '../../data/TimelineItems.ts';
 import { TimelineCard } from './TimeLineCard.tsx';
 
 interface TimelineProps {

@@ -6,8 +6,8 @@ import { WorkExperience } from './components/Experience/WorkExperience';
 import { Home } from './components/Home';
 import { Hobbies } from "./components/Hobbies/Hobbies";
 import { ResumeSection } from "./components/ResumeSection/ResumeSection";
-import { timelineItems } from './data/timelineItems';
-import { navItems } from './data/navItems';
+import { timelineItems } from './data/TimelineItems.ts';
+import { navItems } from './data/NavItems.ts';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +21,7 @@ function App() {
         />
 
         <main className="flex-1">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div>{/* className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"*/}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/timeline" element={<Timeline items={timelineItems} />} />
