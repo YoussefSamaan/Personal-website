@@ -47,7 +47,6 @@ export const technicalSkills: TechSkillItem[] = [
                 // "WebSockets",   // Extra added
                 // "Blockchain"    // Extra added
                 "stable-baselines3",
-                "PySpark",
                 "JUnit",
                 "Bootstrap",
                 "tailwindcss",
@@ -59,14 +58,13 @@ export const technicalSkills: TechSkillItem[] = [
             items: [
                 "Python",
                 "SQL/NoSQL",
-                "NoSQL",
                 "C/C++",
                 "Java",
                 "JavaScript",
                 "HTML/CSS",
-                "OCaml",   // Extra added
-                "Bash",    // Extra added
-                "MATLAB",   // Extra added
+                "OCaml",
+                "Bash",
+                "MATLAB",
                 // "Ruby",         // Extra added
                 // "Go",           // Extra added
                 // "Kotlin"        // Extra added

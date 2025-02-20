@@ -130,7 +130,7 @@ export const timelineItems: TimelineItem[] = [
         resumeItem: [
             "Architected and implemented a scalable end-to-end data pipeline that extracts data for different customers from a datalake, parses, transforms, compresses, and stores them on Amazon OpenSearch and S3 buckets.",
             "Designed data pipelines to handle 100+GB of data per day for one customer for 10+ customers using PySpark.",
-            "Optimized data access for 100+ radio experts, radio engineers, and ML specialists, reducing retrieval time by over 99%.",
+            "Optimized data access for 100+ radio experts, radio engineers, and ML specialists, reducing retrieval time by 99%.",
             "Utilized Agile scrum methodologies through daily stand-ups and iterative development, leveraging regular customer feedback to drive continuous improvement."
         ],
         image: "https://media.licdn.com/dms/image/v2/C4E0BAQGm9tH6lKJ-Gg/company-logo_200_200/company-logo_200_200/0/1632729373904/ericsson_logo?e=2147483647&v=beta&t=6d0mFX1zorP630tMA6rBw_5wrO-zagglpmUP7hQd6F8",
@@ -338,6 +338,22 @@ export const timelineItems: TimelineItem[] = [
     },
 
     {
+        type: "award",
+        title: "Dean's Honor's List",
+        organization: "TAV College",
+        location: "",
+        date: "",
+        description: ["I was on the Dean's Honor's List throughout my studies At TAV."],
+        resumeItem: ["Dean's Honor's List 4x."],
+        image: "",
+        technologies: ['', ''],
+        links: [
+            {label: '', url: ''},
+        ],
+        icon: Trophy,
+    },
+
+    {
         type: "education",
         title: "DEC in Pure and Applied Science",
         organization: "TAV College",
@@ -348,6 +364,21 @@ export const timelineItems: TimelineItem[] = [
             {label: 'Website', url: 'https://www.tav.ca/'},
         ],
         icon: GraduationCap,
+    },
+
+    {
+        type: "award",
+        title: "Outstanding Achievement",
+        organization: "CDC Vimont",
+        location: "",
+        date: "",
+        description: ["Received it for finishing 3 years in 1 on my own and with a high academic standing."],
+        image: "",
+        technologies: ['', ''],
+        links: [
+            {label: '', url: ''},
+        ],
+        icon: Trophy,
     },
 
 ]
