@@ -15,9 +15,11 @@ export const ResumeList = () => {
                             <div className="flex items-center pl-1">
                                 <FileText className="w-8 h-8 text-slate-600 mr-4" />
                                 <div>
-                                    <h3 className="text-lg font-semibold text-slate-800">{resume.name}</h3>
-                                    <p className="text-sm text-slate-500 mt-1">{resume.description}</p>
-                                    <p className="text-xs text-slate-400 mt-2">Last modified: {resume.lastModified}</p>
+                                    <h3 className="text-lg font-semibold text-slate-800 pl-1">{resume.name}</h3>
+                                    {resume.description && <p className="text-sm text-slate-500 mt-1">{resume.description}</p>}
+                                    {resume.lastModified && <p className="text-xs text-slate-400 mt-2">Last modified: {resume.lastModified}</p>}
+                                    {/*<p className="text-sm text-slate-500 mt-1">{resume.description}</p>*/}
+                                    {/*<p className="text-xs text-slate-400 mt-2">Last modified: {resume.lastModified}</p>*/}
                                 </div>
                             </div>
                             <div className="flex items-center space-x-2">

@@ -54,8 +54,8 @@ export interface MovieInfo {
 
 export interface ResumeItem {
     name: string;
-    description: string;
-    lastModified: string;
+    description?: string;
+    lastModified?: string;
     link: string;
 }
 
